@@ -104,7 +104,7 @@ ifneq ("$(filter ppc64 powerpc64,$(HOST_CPU))","")
   NO_ASM := 1
   $(warning Architecture "$(HOST_CPU)" not officially supported.')
 endif
-ifneq ("$(filter ppc64le powerpc64le,$(HOST_CPU))","")
+ifneq ("$(filter ppc64el ppc64le powerpc64le,$(HOST_CPU))","")
   CPU := PPC
   ARCH_DETECTED := 64BITS
   BIG_ENDIAN := 0
@@ -132,6 +132,22 @@ ifneq ("$(filter riscv64,$(HOST_CPU))","")
     ARCH_DETECTED := 64BITS
     PIC ?= 1
     NO_ASM := 1
+    $(warning Architecture "$(HOST_CPU)" not officially supported.)
+endif
+ifneq ("$(filter loongarch64,$(HOST_CPU))","")
+    CPU := LOONGARCH64
+    ARCH_DETECTED := 64BITS
+    PIC ?= 1
+    NO_ASM := 1
+    NO_SSE := 1
+    $(warning Architecture "$(HOST_CPU)" not officially supported.)
+endif
+ifneq ("$(filter mips64,$(HOST_CPU))","")
+    CPU := MIPS64
+    ARCH_DETECTED := 64BITS
+    PIC ?= 1
+    NO_ASM := 1
+    NO_SSE := 1
     $(warning Architecture "$(HOST_CPU)" not officially supported.)
 endif
 ifeq ("$(CPU)","NONE")
